@@ -1,0 +1,8 @@
+.vs/
+bin/
+lib/
+out/
+paper-training-data/
+recorded-test-data/
+trained-model/
+venv/
