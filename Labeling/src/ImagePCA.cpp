@@ -1,5 +1,15 @@
 #include "ImagePCA.h"
+#include "SpatialVariance.h"
 
 Eigen::Vector3f ImagePCA::principalAxis() {
-  return Eigen::Vector3f();
+  
+  std::vector<Eigen::Vector3f> pos;
+  for (auto m : marker)
+  {
+    pos.push_back(m.pos);
+  }
+  spread<Eigen::Vector3f, Eigen::Matrix3f> pca(pos);
+  pca.doEvalEvec();
+  //should be normalized already
+  return pca.getEigenvec().normalized();
 }
