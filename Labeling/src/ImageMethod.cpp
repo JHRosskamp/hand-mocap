@@ -1,4 +1,6 @@
 #include "ImageMethod.h"
+#include <iostream>
+#include <fstream>
 
 void ImageMethod::normalize() {
   const size_t nMarkers = projectedMarker.size();
@@ -109,4 +111,20 @@ Eigen::Matrix3f ImageMethod::computeProjectionMatrix() {
   projection(2, 2) = up.z();
 
   return projection;
+}
+
+void ImageMethod::printImage(std::string& filename) {
+  std::ofstream file;
+  file.open(filename);
+  file << "P2 " <<  IMAGE_SIZE << " " << IMAGE_SIZE << " 255\n";
+
+  Eigen::MatrixXf imgValue = data.image.get_data();
+  for (int i = 0; i < IMAGE_SIZE; ++i) {
+    for (int j = 0; j < IMAGE_SIZE; ++j) {
+      int val = int(imgValue(i, j) * 255 + 0.5);
+      file << val << " ";
+    }
+    file << "\n";
+  }
+  file.close();
 }

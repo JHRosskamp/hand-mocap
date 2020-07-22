@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include "Marker.h"
 
 
@@ -16,16 +17,16 @@ public:
     splat();
   }
 
-private:
+protected:  
   void normalize();
   void splat();
   void project();
   Eigen::Matrix3f computeProjectionMatrix();
-  inCNN data;
+  void printImage(std::string& filename);
 
-protected:  
   virtual Eigen::Vector3f principalAxis() = 0;
 
+  inCNN data;
   std::vector<Marker> marker, projectedMarker;
   const int IMAGE_SIZE = 52;
   const float MOCAP_CONV_INPUT_IMAGE_PADDING = 0.1;
