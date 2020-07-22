@@ -11,10 +11,11 @@ public:
     marker = in; 
   }
 
-  void createImage() {
+  inCNN createImage() {
     project();
     normalize();
     splat();
+    return data;
   }
 
 protected:  
