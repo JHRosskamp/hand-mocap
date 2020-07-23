@@ -13,5 +13,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 include_directories(${CMAKE_SOURCE_DIR}/ThirdParty/includes)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/Labeling/include)
+include_directories(${CMAKE_SOURCE_DIR}/Data/include)
 
 add_subdirectory(Labeling)
+add_subdirectory(Data)
