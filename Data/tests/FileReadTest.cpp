@@ -24,6 +24,7 @@ TEST_CASE("Read Training Data") {
   REQUIRE(numberFrames == 51);
 
   std::vector<Marker> marker = input.getNextFrame();
+  REQUIRE(marker.size() == 19);
   REQUIRE(marker[0].pos.x() == Approx(-137.943));
   REQUIRE(marker[18].pos.z() == Approx(90.2687));
 

@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.8)
+#cmake_minimum_required (VERSION 3.8)
 project ("HandTracking")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -9,7 +9,12 @@ enable_testing()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-#set(EXT_INCLUDES "${CMAKE_SOURCE_DIR}/ThirdParty/includes")
+set(PYTORCH_PATH "D:/Libs/libtorch/")
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PYTORCH_PATH})
+
+find_package(Torch REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+
 include_directories(${CMAKE_SOURCE_DIR}/ThirdParty/includes)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/Labeling/include)

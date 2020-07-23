@@ -2,7 +2,7 @@
 
 class ImagePCA : public ImageMethod {
 public:
-  ImagePCA();
+  ImagePCA() {};
   Eigen::Vector3f principalAxis();
 
 };
