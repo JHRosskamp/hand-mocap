@@ -1,8 +1,17 @@
-add_library(lib_label src/ImagePCA.cpp include/ImagePCA.h 
+add_library(lib_label include/ImagePCA.h src/ImagePCA.cpp 
+                      include/ImagePalm.h src/ImagePalm.cpp
+                      include/ImageRandom.h src/ImageRandom.cpp
                       include/ImageMethod.h src/ImageMethod.cpp 
                       include/SpatialVariance.h
-                      include/CNN.h src/CNN.cpp)
-target_link_libraries(lib_label ${TORCH_LIBRARIES})
+                      include/DataLoaderTotal.h 
+                      include/VGG8.h
+                      include/MarkerLabeling.h src/MarkerLabeling.cpp
+                      include/marker_label.h src/marker_label.cpp
+                      include/marker_matching.h src/marker_matching.cpp)
+                      #include/BaseCNN.h 
+                      #include/VGG8.h )
+target_include_directories(lib_label PUBLIC ${LEMON_INCLUDE_DIRS})
+target_link_libraries(lib_label ${TORCH_LIBRARIES} lemon)
 
 add_executable(TrainingData src/TrainingData.cpp)
 target_link_libraries(TrainingData lib_label lib_data)
@@ -15,4 +24,13 @@ if (MSVC)
                      $<TARGET_FILE_DIR:TrainingData>)
 endif (MSVC)
 
-add_subdirectory(tests)
+add_executable(TrainingCNN src/CNNTraining.cpp)
+target_link_libraries(TrainingCNN lib_label lib_data)
+
+add_executable(LabelFromFile src/LabelFromFile.cpp)
+target_link_libraries(LabelFromFile lib_label lib_data)
+
+add_executable(Calibration src/Calibration.cpp)
+target_link_libraries(Calibration lib_label lib_data lib_ik)
+
+#add_subdirectory(tests)

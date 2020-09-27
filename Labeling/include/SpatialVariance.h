@@ -59,6 +59,18 @@ public:
     return ret;
   }
 
+  std::vector<T> getAllEigenvec() {
+    std::vector<T> ret;
+    for (int i = 0; i < dim; ++i) {
+      T tmp;
+      for (int j = 0; j < dim; ++j) {
+        tmp(j) = evec(j, i);
+      }
+      ret.push_back(tmp);
+    }
+    return ret;
+  }
+
 private:
   void calcCovMatrix() {
     int size = input.size();

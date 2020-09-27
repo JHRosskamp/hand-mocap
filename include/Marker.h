@@ -73,8 +73,15 @@ public:
     this->label = label;
   }
 
+  Marker(Eigen::Vector3f pos, marker_label label, int filePosition) {
+    this->pos = pos;
+    this->label = label;
+    this->filePosition = filePosition;
+  }
+
   Eigen::Vector3f pos;
   marker_label label;
+  int filePosition = -1;
 };
 
 class inCNN {

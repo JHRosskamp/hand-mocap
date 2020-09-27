@@ -9,7 +9,7 @@ TEST_CASE("Read Training Data") {
 
   SECTION("split test") {
     std::string s = "a\tbc\tdef";
-    auto res = input.splitString(s);
+    auto res = splitString(s);
     REQUIRE(res[0] == "a");
     REQUIRE(res[1] == "bc");
     REQUIRE(res[2] == "def");

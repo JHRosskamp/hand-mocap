@@ -1,3 +1,4 @@
+#pragma once
 /// tracking_data contains basic information found in the header of a trc-file.
 struct metadata {
 

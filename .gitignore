@@ -6,3 +6,8 @@ paper-training-data/
 recorded-test-data/
 trained-model/
 venv/
+TrainingData/
+HandMotion/
+Data/tests
+Labeling/tests
+ThirdParty

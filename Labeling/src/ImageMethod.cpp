@@ -33,7 +33,7 @@ void ImageMethod::normalize() {
   {
     Eigen::Vector2f plane = Eigen::Vector2f(projectedMarker[iMarker].pos.x() + shift_x, projectedMarker[iMarker].pos.z() + shift_z) / scale_axis + Eigen::Vector2f(0.1f, 0.1f);
     float depth = (projectedMarker[iMarker].pos.y() + shift_depth) / scale_depth + 0.1f;
-    data.normalized_marker[iMarker] = Marker(Eigen::Vector3f(plane.x(), depth, plane.y()), projectedMarker[iMarker].label);
+    data.normalized_marker[iMarker] = Marker(Eigen::Vector3f(plane.x(), depth, plane.y()), projectedMarker[iMarker].label, projectedMarker[iMarker].filePosition);
   }
 }
 
@@ -84,6 +84,7 @@ void ImageMethod::project() {
   for (size_t iMarker = 0; iMarker < marker.size(); ++iMarker) {
      projectedMarker[iMarker].pos = projectionMatrix * marker[iMarker].pos;
      projectedMarker[iMarker].label = marker[iMarker].label;
+     projectedMarker[iMarker].filePosition = marker[iMarker].filePosition;
   }
 }
 
@@ -127,4 +128,12 @@ void ImageMethod::printImage(std::string& filename) {
     file << "\n";
   }
   file.close();
+}
+
+Eigen::Vector3f ImageMethod::getCenter() {
+  Eigen::Vector3f center = Eigen::Vector3f(0,0,0);
+  for (int i = 0; i < marker.size(); ++i) {
+    center += marker[i].pos;
+  }
+  return center / marker.size();
 }

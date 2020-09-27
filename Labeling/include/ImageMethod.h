@@ -18,12 +18,15 @@ public:
     return data;
   }
 
+  Eigen::Vector3f getCenter();
+
+  void printImage(std::string& filename);
+
 protected:  
   void normalize();
   void splat();
   void project();
   Eigen::Matrix3f computeProjectionMatrix();
-  void printImage(std::string& filename);
 
   virtual Eigen::Vector3f principalAxis() = 0;
 

@@ -5,10 +5,12 @@
 #include "Marker.h"
 #include "Metadata.h"
 
+std::vector<std::string> splitString(std::string s);
+
 class MarkerFileInput {
 public:
   MarkerFileInput(std::string const& filename);
-
+  MarkerFileInput() { ; };
   std::vector<Marker> getNextFrame() {
      ++counter;
      return data[counter];
@@ -22,10 +24,12 @@ public:
     return frameNumber;
   }
   void readFile();
-  std::vector<std::string> splitString(std::string s);
+  void readFileLabels();
+  //std::vector<std::string> splitString(std::string s);
 private:
   //std::string filename;
   void readMarker();
+  void readMarkerLabels();
   void readMetadata();
 
   std::ifstream file;
