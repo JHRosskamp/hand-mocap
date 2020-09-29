@@ -45,8 +45,8 @@ void ue_interface::readFile() {
 
   std::vector<std::string> paths;
   //paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/Test");
-  //paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/User5/capture1");
-  paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/glass");
+  paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/User5/capture1");
+  //paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/glass");
   //SingleFile atm
   for (const auto& name : paths) {
     for (const auto& entry : std::filesystem::directory_iterator(name)) {
@@ -159,11 +159,11 @@ void ue_interface::getMarkerData(float* data, int nData) {
 void ue_interface::getNextMarkerDataLabels(float* data, bool* label, int nData) {
   //std::vector <Eigen::Vector3f> marker = ik.GetMarkerData();
   getLabel();
-  sort();
+  //sort();
   for (int i = 0; i < nData; ++i) {
-    data[3 * i] = marker[i].pos.x()*10;
-    data[3 * i + 1] = marker[i].pos.y()*10;
-    data[3 * i + 2] = marker[i].pos.z()*10;
+    data[3 * i] = marker[i].pos.x();
+    data[3 * i + 1] = marker[i].pos.y();
+    data[3 * i + 2] = marker[i].pos.z();
     label[i] = bPredictedLabel[i];
   }
 }

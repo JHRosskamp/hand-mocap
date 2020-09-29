@@ -26,15 +26,13 @@ int main() {
     return 1;
   }
 
-  //torch::Device device(torch::kCPU);
+ 
 
   std::string pathImages, pathMarkers;
   pathImages = "./ImageDataBatch";
   pathMarkers = "./MarkerDataBatch";
   std::vector<std::string> listImages, listMarkers;
 
-  //auto net = VGG8();
-  //torch::save(net, "model-test.pt");
   for (const auto& entry : fs::directory_iterator(pathImages))
     listImages.push_back(entry.path().string());
 
@@ -48,12 +46,13 @@ int main() {
     std::move(dataset),
     batchSize);
 
-  //auto net = std::make_shared<VGG8Impl>();
+
   auto net = VGG8();
   net->to(device);
-  std::cout << "VGG\n";
-  //torch::optim::Adam optimizer(net->parameters(), torch::optim::AdamOptions(1e-3));
+
+
   torch::optim::SGD optimizer(net->parameters(), torch::optim::SGDOptions(0.6));
+  //torch::optim::Adam optimizer(net->parameters(), 0.6);
 
   int n_epochs = 76;
   for (int epoch = 1; epoch < n_epochs; ++epoch) {
@@ -77,7 +76,9 @@ int main() {
       //std::cout << target.slice(0) << std::endl;
       //std::cout << output.slice(0) << std::endl;
       //auto loss = torch::nn::functional::l1_loss(output, target);
-      auto loss = torch::nn::functional::mse_loss(output, target);
+      //auto loss = torch::nn::functional::smooth_l1_loss(output, target);
+      auto loss = torch::nn::functional::nll_loss(output, target);
+      //auto loss = torch::nn::functional::mse_loss(output, target);
       loss.backward();
       optimizer.step();
       std::cout << "Train Epoch " << epoch << " with loss " << loss.item<float>() << std::endl;

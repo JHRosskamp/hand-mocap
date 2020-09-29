@@ -21,7 +21,7 @@ int main() {
     ImagePCA image;
 
 
-    MarkerLabeling label("model-random.pt");// = MarkerLabeling("model-pca.pt");
+    MarkerLabeling label("model-pca-l1.pt");// = MarkerLabeling("model-pca.pt");
     //label.
     
     size_t fileNumber = 0;
@@ -29,18 +29,6 @@ int main() {
     size_t totalFrameNumber = 0;
 
     std::vector<std::string> paths;
-    paths.push_back("../TrainingData/User1/capture1");
-    paths.push_back("../TrainingData/User1/capture2");
-    paths.push_back("../TrainingData/User2/capture1");
-    paths.push_back("../TrainingData/User2/capture2");
-    paths.push_back("../TrainingData/User2/capture3");
-    paths.push_back("../TrainingData/User2/capture4");
-    paths.push_back("../TrainingData/User3/capture1");
-    paths.push_back("../TrainingData/User3/capture2");
-    paths.push_back("../TrainingData/User3/capture3");
-    paths.push_back("../TrainingData/User3/capture4");
-    paths.push_back("../TrainingData/User4/capture1");
-    paths.push_back("../TrainingData/User4/capture2");
     paths.push_back("../TrainingData/User5/capture1");
     paths.push_back("../TrainingData/User5/capture2");
     auto start_time = std::chrono::high_resolution_clock::now();

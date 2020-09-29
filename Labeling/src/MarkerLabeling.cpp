@@ -6,7 +6,7 @@ MarkerLabeling::MarkerLabeling(std::string model) {
 	outMarker.resize(19);
 	bPredictedLabel.resize(19);
 	//torch::load(net, "model-pca.pt");
-	torch::load(net, "D:/VR-Phi/OptiTracking/bin/model-pca.pt");
+	torch::load(net, "D:/VR-Phi/OptiTracking/bin/model-pca-smooth.pt");
 	net->eval();
 	net->to(torch::kCUDA);
 	std::cout << "Success" << std::endl;
@@ -76,6 +76,7 @@ void MarkerLabeling::CallCNN() {
 void MarkerLabeling::PrintAccuracy() {
 	std::cout << "Correct label = " << right << std::endl;
 	std::cout << "Wrong label = " << wrong << std::endl;
+	std::cout << "in percent = " << (float)right / (right + wrong) << std::endl;
 }
 
 void MarkerLabeling::MatchingAll() {

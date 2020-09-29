@@ -87,16 +87,16 @@ void saveNormalizedMarkerBatch(std::vector<inCNN>& data, size_t frame) {
 }
 
 int main() {
-  //ImagePCA image;
+  ImagePCA image;
   //ImagePalm image;
-  ImageRandom image;
+  //ImageRandom image;
   size_t fileNumber = 0;
-  size_t totalFileNumber = 1;
+  size_t totalFileNumber = 1000;
   size_t totalFrameNumber = 0;
   size_t filesSaved = 0;
 
   std::vector<std::string> paths;
-  /*paths.push_back("../TrainingData/User1/capture1");
+  paths.push_back("../TrainingData/User1/capture1");
   paths.push_back("../TrainingData/User1/capture2");
   paths.push_back("../TrainingData/User2/capture1");
   paths.push_back("../TrainingData/User2/capture2");
@@ -107,8 +107,8 @@ int main() {
   paths.push_back("../TrainingData/User3/capture3");
   paths.push_back("../TrainingData/User3/capture4");
   paths.push_back("../TrainingData/User4/capture1");
-  paths.push_back("../TrainingData/User4/capture2");*/
-  paths.push_back("../TrainingData/User5/capture1");
+  paths.push_back("../TrainingData/User4/capture2");
+  //paths.push_back("../TrainingData/User5/capture1");
   for (const auto& name : paths) {
     ++filesSaved;
     std::vector<inCNN> data_vec;
@@ -117,12 +117,29 @@ int main() {
         std::cout << entry.path() << std::endl;
         MarkerFileInput input(entry.path().string());
         input.readFile();
-        auto frameNumber = 1;// input.numberOfFrames();
+        auto frameNumber = input.numberOfFrames();
+        //std::cout << "Number of frames in file = " << frameNumber << std::endl;
         for (int j = 0; j < frameNumber; ++j) {
           std::vector<Marker> marker = input.getNextFrame();
           image.setInputMarker(marker);
-          for (int k = 0; k < 10; ++k) {
+          //for (int k = 0; k < 10; ++k) {
             inCNN data = image.createImage();
+            data_vec.push_back(data);
+          //}
+          ++totalFrameNumber;
+        }
+        ++fileNumber;
+      }
+      
+    }
+    saveNormalizedMarkerBatch(data_vec, filesSaved);
+    saveDepthImageBatch(data_vec, filesSaved);
+  }
+
+
+  return 0;
+}
+
             /*std::vector<Eigen::Vector3f> evec = image.getAllAxis();
             std::cout << image.getCenter() << std::endl;
             for (int i = 0; i < 3; ++i) {
@@ -131,24 +148,3 @@ int main() {
             for (int i = 1; i < 3; ++i) {
               std::cout << marker[16].pos - marker[16 + i].pos << std::endl;
             }*/
-            stringstream tmp;
-            tmp << "img\\img-pca" << k << ".pgm";
-            image.printImage(tmp.str());
-            data_vec.push_back(data);
-          }
-          
-          //saveNormalizedMarker(data,totalFrameNumber);
-          //saveDepthImage(data,totalFrameNumber);
-          ++totalFrameNumber;
-        }
-        ++fileNumber;
-      }
-      
-    }
-    //saveNormalizedMarkerBatch(data_vec, filesSaved);
-    //saveDepthImageBatch(data_vec, filesSaved);
-  }
-
-
-  return 0;
-}

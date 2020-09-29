@@ -27,8 +27,8 @@ endif (MSVC)
 add_executable(TrainingCNN src/CNNTraining.cpp)
 target_link_libraries(TrainingCNN lib_label lib_data)
 
-add_executable(LabelFromFile src/LabelFromFile.cpp)
-target_link_libraries(LabelFromFile lib_label lib_data)
+add_executable(LabelingAccuracy src/LabelingAccuracy.cpp)
+target_link_libraries(LabelingAccuracy lib_label lib_data)
 
 add_executable(Calibration src/Calibration.cpp)
 target_link_libraries(Calibration lib_label lib_data lib_ik)
