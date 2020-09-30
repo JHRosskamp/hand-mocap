@@ -6,7 +6,8 @@ MarkerLabeling::MarkerLabeling(std::string model) {
 	outMarker.resize(19);
 	bPredictedLabel.resize(19);
 	//torch::load(net, "model-pca.pt");
-	torch::load(net, "D:/VR-Phi/OptiTracking/bin/model-pca-smooth.pt");
+	//torch::load(net, "D:/VR-Phi/OptiTracking/bin/model-pca-neu.pt");
+	torch::load(net, model);
 	net->eval();
 	net->to(torch::kCUDA);
 	std::cout << "Success" << std::endl;

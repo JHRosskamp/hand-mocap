@@ -11,8 +11,8 @@
 class ue_interface : public iue_interface {
 public:
   ue_interface();
-  int init();
-  void readFile();
+  int init(const char* file);
+  void readFile(const char* file);
   void doLabeling();
   void centerOnFinger();
   void labelMarkers();

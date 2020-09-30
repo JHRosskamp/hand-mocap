@@ -72,13 +72,8 @@ int main() {
       optimizer.zero_grad();
       
       auto output = net->forward(data).to(torch::kCUDA);
-      //auto loss = torch::nn::functional::cross_entropy(output, target);
-      //std::cout << target.slice(0) << std::endl;
-      //std::cout << output.slice(0) << std::endl;
       //auto loss = torch::nn::functional::l1_loss(output, target);
-      //auto loss = torch::nn::functional::smooth_l1_loss(output, target);
-      auto loss = torch::nn::functional::nll_loss(output, target);
-      //auto loss = torch::nn::functional::mse_loss(output, target);
+      auto loss = torch::nn::functional::mse_loss(output, target);
       loss.backward();
       optimizer.step();
       std::cout << "Train Epoch " << epoch << " with loss " << loss.item<float>() << std::endl;

@@ -21,7 +21,7 @@ int main() {
     ImagePCA image;
 
 
-    MarkerLabeling label("model-pca-l1.pt");// = MarkerLabeling("model-pca.pt");
+    MarkerLabeling label("model-final.pt");// = MarkerLabeling("model-pca.pt");
     //label.
     
     size_t fileNumber = 0;

@@ -4,7 +4,7 @@ project ("HandTracking")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(UNREAL_PLUGIN_PATH "D:/UETracking/Plugins/OptiTracking")
+set(UNREAL_PLUGIN_PATH "D:/UETrackingTest/Plugins/OptiTracking")
 set(UNREAL_LIB_DIR "${UNREAL_PLUGIN_PATH}/ThirdParty/Tracking")
 set(UNREAL_INCLUDE_DIR "${UNREAL_PLUGIN_PATH}/Source/OptiTracking/Public")
 

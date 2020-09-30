@@ -2,8 +2,8 @@
 
 class iue_interface {
 public:
-  virtual int init() = 0;
-  virtual void readFile() = 0;
+  virtual int init(const char* file) = 0;
+  virtual void readFile(const char* file) = 0;
   virtual void labelMarkers() = 0;
   virtual void inverseKinematic() = 0;
   virtual void doLabeling() = 0;

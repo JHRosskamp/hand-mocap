@@ -28,25 +28,24 @@ ue_interface::ue_interface() {
 
 }
 
-int ue_interface::init() {
+int ue_interface::init(const char* file) {
   LoadLibrary("torch_cuda.dll");
   if (!torch::cuda::is_available()) {
     std::cout << "Cuda not available\n";
     return 1;
   }
   //return 0;
-  label = MarkerLabeling("model-pca.pt");
+  label = MarkerLabeling(file);
   return 0;
 }
 
-void ue_interface::readFile() {
+void ue_interface::readFile(const char* file) {
   size_t fileNumber = 0;
   size_t totalFileNumber = 1;
 
   std::vector<std::string> paths;
-  //paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/Test");
-  paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/User5/capture1");
-  //paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/glass");
+  //paths.push_back("D:/VR-PHI/OptiTracking/TrainingData/User5/capture1");
+  paths.push_back(file);
   //SingleFile atm
   for (const auto& name : paths) {
     for (const auto& entry : std::filesystem::directory_iterator(name)) {
@@ -159,7 +158,7 @@ void ue_interface::getMarkerData(float* data, int nData) {
 void ue_interface::getNextMarkerDataLabels(float* data, bool* label, int nData) {
   //std::vector <Eigen::Vector3f> marker = ik.GetMarkerData();
   getLabel();
-  //sort();
+  sort();
   for (int i = 0; i < nData; ++i) {
     data[3 * i] = marker[i].pos.x();
     data[3 * i + 1] = marker[i].pos.y();

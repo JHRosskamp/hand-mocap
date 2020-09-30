@@ -118,14 +118,12 @@ int main() {
         MarkerFileInput input(entry.path().string());
         input.readFile();
         auto frameNumber = input.numberOfFrames();
-        //std::cout << "Number of frames in file = " << frameNumber << std::endl;
+ 
         for (int j = 0; j < frameNumber; ++j) {
           std::vector<Marker> marker = input.getNextFrame();
           image.setInputMarker(marker);
-          //for (int k = 0; k < 10; ++k) {
-            inCNN data = image.createImage();
-            data_vec.push_back(data);
-          //}
+          inCNN data = image.createImage();
+          data_vec.push_back(data);
           ++totalFrameNumber;
         }
         ++fileNumber;
@@ -139,12 +137,3 @@ int main() {
 
   return 0;
 }
-
-            /*std::vector<Eigen::Vector3f> evec = image.getAllAxis();
-            std::cout << image.getCenter() << std::endl;
-            for (int i = 0; i < 3; ++i) {
-              std::cout << evec[i] << std::endl;
-            }
-            for (int i = 1; i < 3; ++i) {
-              std::cout << marker[16].pos - marker[16 + i].pos << std::endl;
-            }*/
